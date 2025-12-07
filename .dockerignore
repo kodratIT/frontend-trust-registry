@@ -1,0 +1,50 @@
+# =============================================================================
+# Docker Ignore - ToIP Trust Registry Frontend
+# =============================================================================
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Build outputs
+build
+.svelte-kit
+
+# Environment files (use build args instead)
+.env
+.env.*
+!.env.example
+
+# IDE and Editor
+.vscode
+.idea
+*.swp
+*.swo
+.DS_Store
+
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+docs/
+LICENSE
+
+# Docker files (prevent recursive copying)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Tests
+*.test.*
+*.spec.*
+__tests__
+coverage
+
+# Misc
+*.log
+npm-debug.log*
+.npm
+tmp
+temp

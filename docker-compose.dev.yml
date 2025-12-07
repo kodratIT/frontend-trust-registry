@@ -1,0 +1,20 @@
+# =============================================================================
+# ToIP Trust Registry Frontend - Development Docker Compose
+# =============================================================================
+# Usage: docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build
+# =============================================================================
+
+services:
+  frontend:
+    build:
+      target: deps  # Only build to deps stage for dev
+    volumes:
+      - .:/app
+      - /app/node_modules  # Anonymous volume for node_modules
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+    environment:
+      - NODE_ENV=development
+    command: npm run dev -- --host 0.0.0.0
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5173"]
