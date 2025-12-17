@@ -50,15 +50,8 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 sveltekit
 
-# Copy built application
-COPY --from=builder /app/build ./build
-COPY --from=builder /app/package.json ./
-
-# Install production dependencies only
-RUN npm install --omit=dev
-
-# Set ownership
-RUN chown -R sveltekit:nodejs /app
+# Copy built application (adapter-node output is self-contained)
+COPY --from=builder --chown=sveltekit:nodejs /app/build ./build
 
 # Switch to non-root user
 USER sveltekit
